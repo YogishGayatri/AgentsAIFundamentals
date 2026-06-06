@@ -24,7 +24,8 @@ agents you build and control with **LangChain** and **LangGraph**.
     ├── 03_structured_output.py
     ├── 04_create_agent.py
     ├── 05_mapping.md
-    ├── chat_ui.py          #   live streaming chat demo
+    ├── chat_app.py         #   browser UI (Streamlit): chat + structured output, live trace
+    ├── chat_ui.py          #   terminal version of the live chat
     ├── exercise.py         #   the daily assignment
     └── exercise_solution.py
 ```

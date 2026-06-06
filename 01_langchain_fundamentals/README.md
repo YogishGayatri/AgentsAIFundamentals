@@ -17,7 +17,8 @@ Run them in order:
 | 3 | `03_structured_output.py` | Make the model return a validated object | 10 min |
 | 4 | `04_create_agent.py` | Collapse the loop into 3 lines | 16 min |
 | — | `05_mapping.md` | The one-slide "raw loop ↔ LangChain today" table | 4 min |
-| — | `chat_ui.py` | A live streaming chat so the room *watches* the loop turn | demo |
+| — | `chat_app.py` | **Browser UI** (Streamlit): chat + structured-output tabs with a live trace | demo |
+| — | `chat_ui.py` | Terminal version of the same live streaming chat | demo |
 | — | `exercise.py` | Your hands-on assignment (a TODO skeleton) | 8 min |
 
 ```bash
@@ -25,8 +26,23 @@ python 01_langchain_fundamentals/01_chat_models_and_messages.py
 python 01_langchain_fundamentals/02_tools_and_roundtrip.py
 python 01_langchain_fundamentals/03_structured_output.py
 python 01_langchain_fundamentals/04_create_agent.py
-python 01_langchain_fundamentals/chat_ui.py        # interactive
+python 01_langchain_fundamentals/chat_ui.py        # interactive (terminal)
 ```
+
+### Browser UI (recommended for the workshop)
+
+A Streamlit app that shows the whole Day 1 surface with a **live trace** of what's
+happening locally — 🤔 thinking → 🔧 the model asks for a tool → ↳ the tool's
+result → the model types the answer. Two tabs: **Agent chat** and **Structured
+output**.
+
+```bash
+streamlit run 01_langchain_fundamentals/chat_app.py
+```
+
+It opens at http://localhost:8501. Pick the provider/model in the sidebar (reads
+your `.env`), then try *"weather in London"* or *"what is 12 * 9?"*. Stop with
+Ctrl-C in the terminal.
 
 ## What we deliberately skip today
 
