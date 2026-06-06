@@ -6,7 +6,7 @@
 > control**. Everything today should land as *"oh — this is my raw loop, formalized."*
 
 Every script gets its model from the repo-root `providers.py`, so it runs against
-Groq by default and against Gemini or FM Gateway by changing one line in `.env`.
+Groq by default and against the FM Gateway by changing one line in `.env`.
 
 Run them in order:
 

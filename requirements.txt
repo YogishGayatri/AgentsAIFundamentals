@@ -11,5 +11,4 @@ truststore>=0.9
 
 # Providers — install at least the one you plan to use (Groq is the default)
 langchain-groq>=0.3           # Groq
-langchain-google-genai>=2.0   # Gemini      (optional)
 langchain-openai>=0.3         # FM Gateway  (OpenAI-compatible, optional)

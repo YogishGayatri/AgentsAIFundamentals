@@ -12,7 +12,7 @@ agents you build and control with **LangChain** and **LangGraph**.
 
 ```
 .
-├── providers.py            # ONE switchboard: Groq (default) / Gemini / FM Gateway
+├── providers.py            # ONE switchboard: Groq (default) / FM Gateway
 ├── .env.example            # copy to .env, add one key
 ├── requirements.txt
 ├── 00_setup/               # Day -1 · get everyone able to call an LLM
@@ -49,7 +49,6 @@ You never edit example code to change providers. Every script calls
 | `PROVIDER=` | Uses | Key needed |
 |-------------|------|------------|
 | `groq` (default) | `ChatGroq`, free + fast | `GROQ_API_KEY` |
-| `gemini` | `ChatGoogleGenerativeAI` | `GOOGLE_API_KEY` |
 | `fm` | OpenAI client pointed at the FM Gateway `base_url` | `FM_API_KEY` |
 
 ## Roadmap

@@ -54,10 +54,10 @@ def check_env():
     load_dotenv()
 
     provider = os.getenv("PROVIDER", "groq").lower()
-    key_var = {"groq": "GROQ_API_KEY", "gemini": "GOOGLE_API_KEY", "fm": "FM_API_KEY"}.get(provider)
+    key_var = {"groq": "GROQ_API_KEY", "fm": "FM_API_KEY"}.get(provider)
 
     if key_var is None:
-        bad(f"PROVIDER='{provider}' is not one of: groq, gemini, fm")
+        bad(f"PROVIDER='{provider}' is not one of: groq, fm")
         return False
 
     value = os.getenv(key_var, "")

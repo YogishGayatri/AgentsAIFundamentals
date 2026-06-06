@@ -15,7 +15,6 @@ You only need **one** provider. We default to **Groq** because it's free and fas
 | Provider | Where to get a key | Put it in `.env` as |
 |----------|--------------------|---------------------|
 | **Groq** (default) | https://console.groq.com/keys | `GROQ_API_KEY` |
-| Gemini (optional) | https://aistudio.google.com/apikey | `GOOGLE_API_KEY` |
 | FM Gateway (optional) | internal 3DS gateway | `FM_API_KEY` |
 
 ## 2. Create your environment
@@ -35,7 +34,7 @@ cp .env.example .env
 # open .env and paste your key next to GROQ_API_KEY
 ```
 
-Leave `PROVIDER=groq`. (Later you can flip it to `gemini` or `fm` — every
+Leave `PROVIDER=groq`. (Later you can flip it to `fm` — every
 script reads from here, so that one line is the only thing you change.)
 
 ## 4. Verify everything
@@ -60,7 +59,7 @@ Tomorrow we wrap structure around exactly this call.
 ## Troubleshooting
 
 **`CERTIFICATE_VERIFY_FAILED: self signed certificate in certificate chain`**
-(usually Gemini or FM Gateway on a corporate/managed machine)
+(usually the FM Gateway on a corporate/managed machine)
 
 Your company's network intercepts HTTPS with its own root CA, which Python
 doesn't trust by default. Fix it by trusting the OS certificate store (where IT

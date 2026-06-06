@@ -8,14 +8,13 @@ Every script in this repo gets its model the SAME way:
     from providers import get_chat_model
     model = get_chat_model()          # uses the default provider (Groq)
 
-That means you can swap Groq -> Gemini -> FM Gateway by changing ONE line in
-your .env (PROVIDER=...), without editing a single example. The rest of the
-course never has to care which company is behind the model.
+That means you can swap Groq -> FM Gateway by changing ONE line in your .env
+(PROVIDER=...), without editing a single example. The rest of the course never
+has to care which company is behind the model.
 
-The three providers
--------------------
+The two providers
+-----------------
   groq    LangChain's native ChatGroq            (default: free + fast)
-  gemini  LangChain's native ChatGoogleGenerativeAI
   fm      3DS FM Gateway, which speaks the OpenAI API. We therefore use the
           OpenAI client and just point its base_url at the gateway. This is the
           standard trick for ANY "OpenAI-compatible" endpoint.
@@ -29,8 +28,8 @@ from dotenv import load_dotenv
 # --- Corporate TLS / self-signed certificate support -----------------------
 # On many corporate / managed machines, outbound HTTPS is intercepted by a
 # proxy that presents the company's OWN root CA. Python's default certificate
-# bundle (certifi) doesn't know that CA, so providers like Gemini and the FM
-# Gateway fail with:
+# bundle (certifi) doesn't know that CA, so providers like the FM Gateway
+# fail with:
 #     [SSL: CERTIFICATE_VERIFY_FAILED] self signed certificate in certificate chain
 # `truststore` makes Python verify against the OS trust store, where your IT
 # department already installed the corporate CA — fixing every provider at once,
@@ -55,8 +54,7 @@ DEFAULT_PROVIDER = os.getenv("PROVIDER", "groq").lower()
 # We default to llama-3.3-70b-versatile: dependable tool-calling, great for demos.
 DEFAULT_MODELS = {
     "groq": "llama-3.3-70b-versatile",   # alt: "qwen/qwen3-32b" (mirrors FM's Qwen)
-    "gemini": "gemini-2.0-flash",
-    "fm": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    "fm": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
 }
 
 
@@ -65,7 +63,7 @@ def get_chat_model(provider: str | None = None, model: str | None = None,
     """Return a ready-to-use LangChain chat model.
 
     Args:
-        provider: "groq" | "gemini" | "fm". Defaults to PROVIDER in .env (groq).
+        provider: "groq" | "fm". Defaults to PROVIDER in .env (groq).
         model:    model id. Defaults to a good pick for the chosen provider.
         temperature: 0.0 = as deterministic as the model allows (what you want
                      for tool-using agents and reproducible demos).
@@ -83,11 +81,6 @@ def get_chat_model(provider: str | None = None, model: str | None = None,
         # pip install langchain-groq  ;  needs GROQ_API_KEY
         from langchain_groq import ChatGroq
         return ChatGroq(model=model, temperature=temperature, **kwargs)
-
-    if provider == "gemini":
-        # pip install langchain-google-genai  ;  needs GOOGLE_API_KEY
-        from langchain_google_genai import ChatGoogleGenerativeAI
-        return ChatGoogleGenerativeAI(model=model, temperature=temperature, **kwargs)
 
     if provider == "fm":
         # FM Gateway is OpenAI-compatible: use the OpenAI client + a base_url.
