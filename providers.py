@@ -26,6 +26,23 @@ You only need a key for the one you actually use.
 import os
 from dotenv import load_dotenv
 
+# --- Corporate TLS / self-signed certificate support -----------------------
+# On many corporate / managed machines, outbound HTTPS is intercepted by a
+# proxy that presents the company's OWN root CA. Python's default certificate
+# bundle (certifi) doesn't know that CA, so providers like Gemini and the FM
+# Gateway fail with:
+#     [SSL: CERTIFICATE_VERIFY_FAILED] self signed certificate in certificate chain
+# `truststore` makes Python verify against the OS trust store, where your IT
+# department already installed the corporate CA — fixing every provider at once,
+# WITHOUT disabling certificate verification. It's optional: if it isn't
+# installed we just continue (e.g. Groq alone usually works without it).
+#   To enable:  pip install truststore
+try:
+    import truststore
+    truststore.inject_into_ssl()
+except ModuleNotFoundError:
+    pass
+
 # Read .env once, when this module is first imported.
 load_dotenv()
 

@@ -57,6 +57,30 @@ Tomorrow we wrap structure around exactly this call.
 
 ---
 
+## Troubleshooting
+
+**`CERTIFICATE_VERIFY_FAILED: self signed certificate in certificate chain`**
+(usually Gemini or FM Gateway on a corporate/managed machine)
+
+Your company's network intercepts HTTPS with its own root CA, which Python
+doesn't trust by default. Fix it by trusting the OS certificate store (where IT
+already installed that CA) — **not** by disabling verification:
+
+```bash
+pip install truststore
+```
+
+`providers.py` auto-enables it when present. Re-run `check_setup.py`.
+*(It's already in `requirements.txt`, so a fresh `pip install -r requirements.txt`
+includes it.)* If a provider stays unreachable afterward, it may be blocked on
+your network entirely — just use **Groq**, which is all the course needs.
+
+**`GROQ_API_KEY is missing` even though you pasted it** — your `.env` has a
+second `GROQ_API_KEY=` line (often the leftover `your_groq_key_here` placeholder).
+dotenv uses the *last* line. Keep exactly one.
+
+---
+
 ### The mental model for the week
 
 > Foundations day: you hand-wrote the agent loop.
