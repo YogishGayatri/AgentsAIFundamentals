@@ -1,0 +1,10 @@
+# Core — needed for every day of the course
+langchain>=1.0
+langgraph>=1.0
+python-dotenv>=1.0
+pydantic>=2.0
+
+# Providers — install at least the one you plan to use (Groq is the default)
+langchain-groq>=0.3           # Groq
+langchain-google-genai>=2.0   # Gemini      (optional)
+langchain-openai>=0.3         # FM Gateway  (OpenAI-compatible, optional)
