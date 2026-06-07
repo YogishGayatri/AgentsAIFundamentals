@@ -1,15 +1,5 @@
 """
-3. Structured output  (~10 min)
-
-with_structured_output(Schema) forces the model to return a VALIDATED Pydantic
-object instead of free text. It turns "text you'd have to parse and pray" into
-"an object your code can branch on".
-
-This is the bridge from "the model talks" to "the model drives control flow":
-  - tomorrow, a LangGraph router routes on a typed classification like this
-  - the course project's verdict node emits exactly a structured object like this
-
-Run:  python 01_langchain_fundamentals/03_structured_output.py
+3. Structured output 
 """
 
 import sys, os
@@ -22,7 +12,6 @@ from providers import get_chat_model
 
 
 # A generic, relatable schema: triage an incoming support message.
-# (Note how this foreshadows Day 2 routing -- category is a routing key.)
 class TicketClassification(BaseModel):
     category: Literal["billing", "technical", "general"] = Field(
         description="Which queue this message belongs in"
